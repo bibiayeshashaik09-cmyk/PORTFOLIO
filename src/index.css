@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces */
+  --color-base: #0a0c12;
+  --color-surface: #10131b;
+  --color-surface-2: #161a24;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Text */
+  --color-text: #edeff5;
+  --color-text-muted: #8891a6;
+  --color-text-faint: #565d70;
+
+  /* Accent gradient: indigo -> cyan (signal / dev identity) */
+  --color-indigo: #6366f1;
+  --color-cyan: #22d3ee;
+  --color-gold: #f0b457;
+
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Light theme override — toggled via .light class on <html> */
+.light {
+  --color-base: #f7f8fb;
+  --color-surface: #ffffff;
+  --color-surface-2: #eef0f5;
+  --color-border: rgba(10, 12, 18, 0.08);
+  --color-border-strong: rgba(10, 12, 18, 0.16);
+  --color-text: #12141c;
+  --color-text-muted: #565d70;
+  --color-text-faint: #8891a6;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-base);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-indigo);
+    color: white;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-base);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-surface-2);
+    border-radius: 8px;
+    border: 2px solid var(--color-base);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border);
+  }
+
+  .gradient-text {
+    background-image: linear-gradient(120deg, var(--color-indigo), var(--color-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+  }
+
+  .btn-primary {
+    background-image: linear-gradient(120deg, var(--color-indigo), var(--color-cyan));
+    color: #060709;
+    font-weight: 600;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
